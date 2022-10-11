@@ -1,0 +1,20 @@
+json_data = {
+	"data":[
+		{
+			"frase_portugues":"o rato roeu a roupa do rei de roma.",
+			"frase_ingles": "the mouse gnawed the clothes of the king of rome."
+		},
+		{
+			"frase_portugues":"Que tal um truque de mágica?",
+			"frase_ingles": "How about a magic trick?"
+		},
+		{
+			"frase_portugues":"Os soldados eram impetuosos.",
+			"frase_ingles": "The soldiers were impetuous."
+		},
+		{
+			"frase_portugues":"Os soldados eram impetuosos.",
+			"frase_ingles": "The soldiers were impetuous."
+		}
+	]
+}

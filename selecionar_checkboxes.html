@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html><head>
+      <meta charset="utf-8">
+      <title></title>
+      <link rel="stylesheet" type="text/css" href="./estilo/estilo.ccs">
+      <link rel="stylesheet" type="text/css" href="./estilo/botstrapp.ccs">
+      <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+      <script type="text/javascript" src="./res/selecionar_checkboxes.js"></script>
+      <script type="text/javascript" src="./tarefa/selecionar_checkboxes.js"></script>
+   </head>
+   <body>
+      <audio src="https://s3.amazonaws.com/duolingo-data/s3/sounds/wrong_answer.mp3" preload="auto" id="danger-sound" hidden="true"></audio>
+      <audio src="https://s3.amazonaws.com/duolingo-data/s3/sounds/right_answer.mp3" preload="auto" id="success-sound" hidden="true"></audio>
+      <div class="container-fluid" id="app">
+         <div class="row"> 
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+               <div class="row">
+                  <div class="questContainer" firstatempt="true" id="first" questindex="0">
+                     <ol class="breadcrumb">
+                        <li class="active">Complete a frase</li>
+                     </ol>
+                     <div class="progress">
+                        <div class="progress-bar progress-bar-info" v-bind:style="{'width': porcentagem + '%'}">{{porcentagem}}%</div>
+                     </div>
+                     <p class="quest" style="font-weight: bold;">{{frase.frase}}</p>
+                     <label for="checkbox">
+                        <input type="checkbox" id="passiva" v-model="passiva" v-on:click="checkboxzar('passiva')">
+                        Passiva
+                     </label>
+                     <label for="checkbox">
+                        <input type="checkbox" id="ativa" v-model="ativa" v-on:click="checkboxzar('ativa')">
+                        Ativa
+                    </label>
+                     <div class="row">
+                       <div class="interact" style="width: 100%;">
+                         <p class="feedback hideit" style="display: none;"></p>
+                         <div class="check hideit hide" style="display: block;">
+                           <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                             <button type="button" class="btn btn-primary btn-block"  v-bind:style="{'display': check_botao}" v-on:click="checar_resultado">check</button>
+                           </div>
+                         </div>
+                         <div class="navbuttons " style="display: none;">
+                           <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                             <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()" >próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                             </button>
+                           </div>
+                         </div>
+                         <div class="alert alert-success hideit" v-bind:style="{'display': acerto_div}">
+                           <h4>
+                             <span class="glyphicon glyphicon-ok"></span> Correto !
+                           </h4>
+                           <div class="row">
+                             <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                               <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()">próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                               </button>
+                             </div>
+                           </div>
+                         </div>
+                         <div class="alert alert-danger hideit" v-bind:style="{'display': erro_div}">
+                           <h4>
+                             <span class="glyphicon glyphicon-remove"></span>Incorreto!
+                           </h4>
+                           <div style="display: block;padding-left: 20px;">
+                              <div class="glyphicon glyphicon-remove"></div>Resposta correta:
+                              <div class="">
+                                 <div class="glyphicon glyphicon-remove" style="font-weight: bold;">{{voz_correta}}</div>
+                              </div>
+                           </div>
+                           <br>
+                           <div class="row">
+                             <div class="col-xs-6 col-md-4">
+                               <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()">próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                  </div>
+               </div>
+               <c></c>
+            </div>
+         </div>
+      </div>
+      
+      
+      
+      <div>
+         
+      </div>
+      
+   
+
+</body>
+<script type="text/javascript" src="./interface/selecionar_checkboxes.js"></script>
+</html>

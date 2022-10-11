@@ -1,0 +1,45 @@
+#page-create-orphanage {
+  display: flex;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+
+.card {
+
+  box-sizing: border-box;
+  margin: 3.5rem 10rem;
+
+
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+
+  margin-bottom: 1rem;
+
+
+}
+
+main p {
+  text-indent: 3ch;
+  text-align: justify;
+  color: black;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+}
+
+main h3 {
+  color: black;
+  margin-bottom: 5%;
+
+}
+
+main h4 {
+  color: black;
+  margin-top: 5%;
+
+}

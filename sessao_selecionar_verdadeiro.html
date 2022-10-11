@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adicionar um orfanato | Happy</title>
+
+  <link rel="stylesheet" href="./estilo/estilo.css"/>
+  <link rel="stylesheet" href="./estilo/botstrapp.css"/>
+  <link rel="icon" href="./public/images/logo-icon.png" />
+
+  <link rel="stylesheet" href="./public/css/main.css" />
+  <link rel="stylesheet" href="./public/css/animations.css" />
+  <link rel="stylesheet" href="./public/css/sidebar.css" />
+ 
+  <link rel="stylesheet" href="./public/css/buttons.css" />
+  <link rel="stylesheet" href="./public/css/page_sessao.css" />
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+      <script type="text/javascript" src="./res/selecionar_verdadeiro.js"></script>
+      <script type="text/javascript" src="./tarefa/selecionar_verdadeiro.js"></script>
+</head>
+
+<body>
+  <div id="page-sessao">
+    <aside class="animate-right sidebar">
+      
+      <img src="./public/images/logo.svg" alt="Logomarca do site" />
+
+      <footer>
+        <button onclick="history.back()">
+          <img src="./public/images/arrow-back.svg" alt="Voltar" />
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-apper with-sidebar">
+
+
+      <div class="card">
+
+        <div class="container-fluid" id="app" style="color: black;">
+           <div class="row"> 
+              <div class="col-xs-12 col-md-12 h5 col-md-offset-3">
+                 <div class="row">
+                    <div class="questContainer" firstatempt="true" id="first" questindex="0">
+                       <ol class="breadcrumb">
+                          <li class="active" style="font-weight: bold">Selecione o tipo de voz</li>
+                       </ol>
+                       <div class="progress">
+                          <div class="progress-bar progress-bar-info" v-bind:style="{'width': porcentagem + '%'}">{{porcentagem}}%</div>
+                       </div>
+                       
+
+                       <p class="quest">Quadro de palavras</p>
+                      <div class="row" style="font-weight: bold;">
+                        <div class="col-xs-6 col-md-6 h5 col-md-offset-3">
+                          <label class="" v-for="trecho in frase.eng_list" :key="trecho" style="background-color: #f5f6f7">
+                            {{trecho}}
+                          </label>
+                        </div>
+                        <div class="col-xs-6 col-md-6 h5 col-md-offset-3">
+                          <label class="" v-for="trecho in frase.user_list" :key="trecho" style="background-color: #f5f6f7">
+                            {{trecho}}
+                          </label>
+                        </div>
+                      </div>
+
+
+                       <label class="" v-for="trecho in frase.user_show" :key="trecho.frase_frase"  v-bind:style="{ 'background-color': trecho.background_color}">
+                          <div class="icheckbox_flat-green" v-on:click="adicionar_trecho(trecho)" style="position: relative;"><div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" value="a" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px none; opacity: 0;"></ins></div><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px none; opacity: 0;"></ins></div>
+                          {{trecho.frase_frase}}
+                       </label>
+                       <div class="row">
+                         <div class="interact" style="width: 100%;">
+                           <p class="feedback hideit" style="display: none;"></p>
+                           <div class="check hideit hide" style="display: block;">
+                             <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                               <button type="button" class="btn btn-primary btn-block"  v-bind:style="{'display': check_botao}" v-on:click="checar_resultado">check</button>
+                             </div>
+                           </div>
+                           <div class="alert alert-success hideit" v-bind:style="{'display': div_results}">
+                             <h4>
+                               <span class="glyphicon glyphicon-ok"></span> Resultados:
+                             </h4>
+                             <div class="row">
+                               <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                                <div class="">
+                                   <div class="glyphicon glyphicon-remove" style="font-weight: bold;padding-left: 20px;">Acertos: {{acertos}} <br> Erros: {{erros}}<br><br></div>
+                                </div>
+                               </div>
+                             </div>
+                             <div class="row">
+                               <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                                 <button class="btn btn-info btn-block next">próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                                 </button>
+                               </div>
+                             </div>
+                           </div>
+                           <div class="navbuttons " style="display: none; font-weight: bold;">
+                             <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                               <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()" >próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                               </button>
+                             </div>
+                           </div>
+                           <div class="alert alert-success hideit" v-bind:style="{'display': acerto_div}">
+                             <h4>
+                               <span class="glyphicon glyphicon-ok"></span> Correto !
+                             </h4>
+                             <div class="row">
+                               <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                                 <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()">próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                                 </button>
+                               </div>
+                             </div>
+                           </div>
+                           <div class="alert alert-danger hideit" v-bind:style="{'display': erro_div}">
+                             <h4>
+                               <span class="glyphicon glyphicon-remove"></span>Incorreto!
+                             </h4>
+                             <div style="display: block;padding-left: 20px;">
+                                <div class="glyphicon glyphicon-remove"></div>Ordem correta:
+                                <div class="" v-for="u in frase.user_like_list" :key="u" >
+                                   <div class="glyphicon glyphicon-remove" style="font-weight: bold;">{{u}}</div>
+                                </div>
+                                <div class="">
+                                   <div class="glyphicon glyphicon-remove" style="font-weight: bold;"></div>
+                                </div>
+                             </div>
+                             <br>
+                             <div class="row">
+                               <div class="col-xs-6 col-md-4">
+                                 <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()">próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+      </div>
+         
+    </main>
+  </div>
+
+  <script src="./public/scripts/page-create-orphanage.js"></script>
+</body>
+
+<script type="text/javascript" src="./interface/selecionar_verdadeiro.js"></script>
+</html>

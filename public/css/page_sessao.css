@@ -1,0 +1,52 @@
+#page-sessao {
+  display: flex;
+  min-height: 100vh;
+}
+
+.card {
+  box-sizing: border-box;
+  margin: 3.5rem 10rem;
+
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+
+  margin-bottom: 1rem;
+}
+
+.card img {
+  margin-right: 1%;
+
+}
+
+main {
+  flex: 1;
+}
+
+
+main p {
+  text-align: justify;
+  color: black;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+}
+
+main h3 {
+  margin-top: 1%;
+  color: rgb(68, 68, 68);
+  margin-bottom: 1%;
+
+}
+
+main h4 {
+  color: black;
+  margin-top: 5%;
+
+}
+
+main h5 {
+  text-align: justify;
+  color: black;
+
+}
