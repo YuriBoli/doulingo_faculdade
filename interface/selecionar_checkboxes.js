@@ -15,18 +15,30 @@ var appe = new Vue({
     acerto_div: "none",
     check_botao: "block",
     frase: "",
+    div_results: "none",
   },
   methods: {
+    chamar_resultados: function(){
+      if (this.erros + this.acertos == this.total){
+        this.div_results = "block";
+        this.erro_div = "none";
+        this.acerto_div = "none";
+        this.actual_div = "none";
+        this.check_botao = "none";
+        console.log(this.check_botao)
+        this.$forceUpdate();
+      }
+    },
     checkboxzar: function(voz){
       console.log(voz)
       this.passiva = false
       this.ativa = false
       if (voz =="ativa"){
-        this.frase.voz_user == true
+        this.frase.voz_user = true
         this.ativa = true
       }
       if (voz == "passiva"){
-        this.frase.voz_user == false
+        this.frase.voz_user = false
         this.passiva = true
       }
     },
@@ -48,20 +60,21 @@ var appe = new Vue({
       if(this.frases_json["data"].length - 2 >= this.indice_frase_atual){
         this.indice_frase_atual += 1
         this.frase = this.carregar_frase()
-        this.checar_resultado()
         this.update_porcentagem()
       } else {
-        this.checar_resultado()
         this.update_porcentagem(100)
       }
       this.check_botao = "block";
       this.erro_div = "none";
       this.acerto_div = "none";
       this.message = "";
+      this.chamar_resultados();
+      this.passiva = false;
+      this.ativa = false;
       this.$forceUpdate();
     },
     carregar_frase: function(){
-      this.total = this.frases_json["data"].length - 1
+      this.total = this.frases_json["data"].length
       var frase_object = this.frases_json["data"][this.indice_frase_atual]
       var frase = frase_object["frase"]
       var frase_resposta = frase_object["vos_ativa"]

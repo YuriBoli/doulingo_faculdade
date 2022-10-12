@@ -1,23 +1,60 @@
 <!DOCTYPE html>
-<html><head>
-      <meta charset="utf-8">
-      <title></title>
-      <link rel="stylesheet" type="text/css" href="./estilo/estilo.ccs">
-      <link rel="stylesheet" type="text/css" href="./estilo/botstrapp.ccs">
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adicionar um orfanato | Happy</title>
+  <link rel="icon" href="./public/images/logo-icon.png" />
+
+  <link rel="stylesheet" href="./public/css/main.css" />
+  <link rel="stylesheet" href="./public/css/animations.css" />
+  <link rel="stylesheet" href="./public/css/sidebar.css" />
+       <link rel="stylesheet" type="text/css" href="./estilo/estilo.css">
+      <link rel="stylesheet" type="text/css" href="./estilo/botstrapp.css">
+
+  <link rel="stylesheet" href="./public/css/buttons.css" />
+  <link rel="stylesheet" href="./public/css/page_sessao.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
       <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
       <script type="text/javascript" src="./res/escrever_frases.js"></script>
       <script type="text/javascript" src="./tarefa/escrever_frase.js"></script>
-   </head>
-   <body>
-      <audio src="https://s3.amazonaws.com/duolingo-data/s3/sounds/wrong_answer.mp3" preload="auto" id="danger-sound" hidden="true"></audio>
-      <audio src="https://s3.amazonaws.com/duolingo-data/s3/sounds/right_answer.mp3" preload="auto" id="success-sound" hidden="true"></audio>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="page-sessao">
+    <aside class="animate-right sidebar">
+      
+      <img src="./public/images/logo.svg" alt="Logomarca do site" />
+
+      <footer>
+        <button onclick="history.back()">
+          <img src="./public/images/arrow-back.svg" alt="Voltar" />
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-apper with-sidebar">
+
+
+      <div class="card">
+
       <div class="container-fluid" id="app">
          <div class="row"> 
-            <div class="col-xs-12 col-md-6 col-md-offset-3">
+              <div class="col-xs-12 col-md-12 h5 col-md-offset-3">
                <div class="row">
                   <div class="questContainer" firstatempt="true" id="first" questindex="0">
                      <ol class="breadcrumb">
-                        <li class="active">Escreva a frase</li>
+                        <li class="active">Escreva as sentenças usando "passive voice"</li>
                      </ol>
                      <div class="progress">
                         <div class="progress-bar progress-bar-info" v-bind:style="{'width': porcentagem + '%'}">{{porcentagem}}%</div>
@@ -38,6 +75,24 @@
                              </button>
                            </div>
                          </div>
+                           <div class="alert alert-success hideit" v-bind:style="{'display': div_results}">
+                             <h4>
+                               <span class="glyphicon glyphicon-ok"></span> Resultados:
+                             </h4>
+                             <div class="row">
+                               <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                                <div class="">
+                                   <div class="glyphicon glyphicon-remove" style="font-weight: bold;padding-left: 20px;">Acertos: {{acertos}} <br> Erros: {{erros}}<br><br></div>
+                                </div>
+                               </div>
+                             </div>
+                             <div class="row">
+                               <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                                 <button class="btn btn-info btn-block next">próxima<span class="glyphicon glyphicon-chevron-right"></span>
+                                 </button>
+                               </div>
+                             </div>
+                           </div>
                          <div class="alert alert-success hideit" v-bind:style="{'display': acerto_div}">
                            <h4>
                              <span class="glyphicon glyphicon-ok"></span> Correto !
@@ -49,6 +104,7 @@
                              </div>
                            </div>
                          </div>
+
                          <div class="alert alert-danger hideit" v-bind:style="{'display': erro_div}">
                            <h4>
                              <span class="glyphicon glyphicon-remove"></span>Incorreto!
@@ -74,15 +130,13 @@
             </div>
          </div>
       </div>
-      
-      
-      
-      <div>
-         
-      </div>
-      
-   
 
-</body>
+      </div>
+         
+    </main>
+  </div>
+
 <script type="text/javascript" src="./interface/escrever_frase.js"></script>
+</body>
+
 </html>

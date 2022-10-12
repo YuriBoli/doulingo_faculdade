@@ -1,30 +1,34 @@
 json_data = {
 	"data":[
 		{
-			"frase_ingles":"Is lista at work? She asked me if Lisa was at work.",
+			"frase_ingles":"You won't pass the course if you don't study.",
 			"trechos_escondidos":[
 				{
 					// trecho é o trecho que vai ser escondido e posição vai ser usada caso esse mesmo trecho se repita.
 					// então a posição vai selecionar qual é o trecho que tem que esconder.
-					"trecho":"Lisa was at work",
+					"trecho":"don't",
 					"posicao":"1"
 				},
 			]
 		},
 		{
-			"frase_ingles":"Is she late? He asked me if she has late.",
+			"frase_ingles":"If I leave now, I will arrive in Boa Vista at 6:00 PM.",
 			"trechos_escondidos":[
 				{
-					"trecho":"she has late",
+					"trecho":"will arrive",
 					"posicao":"1"
 				},
 			]
 		},
 		{
-			"frase_ingles":"Is the school near here? She asked me if the school was near here.",
+			"frase_ingles":"If I had you I won't anew classmate for the work.",
 			"trechos_escondidos":[
 				{
-					"trecho":"the school was near here.",
+					"trecho":"had",
+					"posicao":"1"
+				},
+				{
+					"trecho":"won't",
 					"posicao":"1"
 				},
 			]

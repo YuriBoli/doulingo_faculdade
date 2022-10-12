@@ -1,15 +1,15 @@
 json_data = {
 	"data":[
 		{
-			"frase":"o rato roeu a roupa do rei de roma.",
+			"frase":"The homework was done by the students.",
 			"vos_ativa": true
 		},
 		{
-			"frase":"Que tal um truque de mágica?",
+			"frase":"The secretary sent the e-mail.",
 			"vos_ativa": true
 		},
 		{
-			"frase":"Os soldados eram impetuosos.",
+			"frase":"The test was sent by the student.",
 			"vos_ativa": false
 		},
 	]
