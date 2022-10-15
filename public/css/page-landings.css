@@ -35,27 +35,6 @@ main h1 {
   animation-delay: 200ms;
 }
 
-.visit a {
-  width: 5rem;
-  height: 5rem;
-  background: #038d1a;
-
-  border: none;
-  border-radius: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: auto;
-
-  animation-delay: 250ms;
-  transition: background 200ms;
-}
-
-.visit a:hover {
-  background: #7cea9a;
-}
 
 /* desktop version */
 
@@ -63,8 +42,8 @@ main h1 {
   #container {
     padding: 5rem, 2rem;
     /* Shorthand background: image repeat position / size */
-    background: url("../images/bg.svg") no-repeat 75% /
-      clamp(30rem, 23vw, 26rem);
+    background: url("../images/programming.svg") no-repeat 75% /
+      clamp(50rem, 23vw, 26rem);
   }
 
   header {
@@ -104,10 +83,31 @@ main h1 {
   .visit p {
     font-size: 1.8rem;
     line-height: 1.5;
-    width: clamp(10rem, 20vw, 22rem);
+    width: clamp(20rem, 50vw, 22rem);
   }
 
   .visit a {
     margin: initial;
   }
 }
+
+button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: #038d1a;
+  border-radius: 1.6rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background: #7cea9a;
+
+}
+

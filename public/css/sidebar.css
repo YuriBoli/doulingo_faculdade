@@ -38,3 +38,46 @@ aside.sidebar footer button:hover {
   padding-left: 15%;
 
 }
+
+aside.sidebar {
+  position: fixed;
+  height: 100%;
+  width: clamp(15rem, 15vw, 25rem);
+  padding: 32px 24px;
+  background: linear-gradient(329.54deg, #26f152 0%, #05a127 100%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  align-items: center;
+
+}
+
+
+aside.sidebar a {
+  width: 7rem;
+  height: 5rem;
+  background: #ffffff;
+
+  border: none;
+  border-radius: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+
+  animation-delay: 250ms;
+  transition: background 200ms;
+}
+
+
+aside.sidebar h4 {
+
+  margin-top: 3px;
+  color: #ffffff;
+
+}
+
