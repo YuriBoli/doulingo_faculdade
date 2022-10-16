@@ -35,6 +35,8 @@ var appe = new Vue({
         this.erros += 1;
         this.erro_div = "block";
       }
+      page_secao.acertos = this.acertos
+      page_secao.erros = this.erros
       this.check_botao = "none";
       this.$forceUpdate();
       //this.ir_proxima_frase()
