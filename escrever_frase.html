@@ -32,32 +32,33 @@
 </head>
 
 <body>
+  <div id="app">
   <div id="page-sessao">
     <aside class="animate-right sidebar">
-
+      
       <img src="./public/images/logo.svg" alt="Logomarca do site" />
 
       <div animate-up>
         <h4>
           Questões Corretas
         </h4>
-        <a class="animate-up" title="Acertos">
+        <a class="animate-up" title="Acertos" >
           <h3>
-            <!-- colocar a PONTUAÇÃO respostas corretas  -->
+           {{acertos}}
           </h3>
-        </a>
-      </div>
+         </a>
+       </div>
 
-      <div animate-up>
+       <div animate-up>
         <h4>
           Questões Incorretas
         </h4>
-        <a class="animate-up" title="Acertos">
+        <a class="animate-up" title="Acertos" >
           <h3>
-            <!-- colocar a PONTUAÇÃO respostas ERRADA  -->
+           {{erros}}
           </h3>
-        </a>
-      </div>
+         </a>
+       </div>
 
       <footer>
         <button onclick="history.back()">
@@ -191,6 +192,7 @@
       </div>
 
     </main>
+  </div>
   </div>
 
   <script type="text/javascript" src="./interface/escrever_frase.js"></script>
