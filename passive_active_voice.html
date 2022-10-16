@@ -34,32 +34,33 @@
 </head>
 
 <body>
+  <div id="app">
   <div id="page-sessao">
     <aside class="animate-right sidebar">
-
+      
       <img src="./public/images/logo.svg" alt="Logomarca do site" />
 
       <div animate-up>
         <h4>
           Questões Corretas
         </h4>
-        <a class="animate-up" title="Acertos">
+        <a class="animate-up" title="Acertos" >
           <h3>
-            <!-- colocar a PONTUAÇÃO respostas corretas  -->
+           {{acertos}}
           </h3>
-        </a>
-      </div>
+         </a>
+       </div>
 
-      <div animate-up>
+       <div animate-up>
         <h4>
           Questões Incorretas
         </h4>
-        <a class="animate-up" title="Acertos">
+        <a class="animate-up" title="Acertos" >
           <h3>
-            <!-- colocar a PONTUAÇÃO respostas ERRADA  -->
+           {{erros}}
           </h3>
-        </a>
-      </div>
+         </a>
+       </div>
 
       <footer>
         <button onclick="history.back()">
@@ -73,7 +74,7 @@
 
       <div class="card">
 
-        <div class="container-fluid" id="app">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12 col-md-12 h5 col-md-offset-3">
               <div class="row">
@@ -207,6 +208,7 @@
       </div>
 
     </main>
+  </div>
   </div>
 
   <script src="./public/scripts/page-create-orphanage.js"></script>
