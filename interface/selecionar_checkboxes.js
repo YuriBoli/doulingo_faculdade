@@ -16,6 +16,12 @@ var appe = new Vue({
     check_botao: "block",
     frase: "",
     div_results: "none",
+    checkbox_verdadeira: false,
+    checkbox_falsa: false,
+    vozes: {
+      "Voz Passiva": "Voz Passiva",
+      "Voz Ativa": "Voz Ativa"
+    }
   },
   methods: {
     chamar_resultados: function(){
@@ -51,7 +57,7 @@ var appe = new Vue({
         this.erros += 1;
         this.erro_div = "block";
       }
-      this.voz_correta = this.frase.voz_correta()
+      this.voz_correta = this.vozes[this.frase.voz_correta()]
       this.check_botao = "none";
       this.$forceUpdate();
       //this.ir_proxima_frase()
