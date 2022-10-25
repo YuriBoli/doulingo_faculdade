@@ -5,17 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Linguana | Desafios</title>
+
   <link rel="icon" href="./public/images/logo-icon.png" />
 
   <link rel="stylesheet" href="./public/css/main.css" />
   <link rel="stylesheet" href="./public/css/animations.css" />
   <link rel="stylesheet" href="./public/css/sidebar.css" />
 
+  <link rel="stylesheet" type="text/css" href="./estilo/estilo.css">
+  <link rel="stylesheet" type="text/css" href="./estilo/botstrapp.css">
+
   <link rel="stylesheet" href="./public/css/buttons.css" />
   <link rel="stylesheet" href="./public/css/page_sessao.css" />
 
-  <link rel="stylesheet" type="text/css" href="./estilo/estilo.css" />
-  <link rel="stylesheet" type="text/css" href="./estilo/botstrapp.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
@@ -27,8 +29,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <script type="text/javascript" src="./res/complete_as_sentencas.js"></script>
-  <script type="text/javascript" src="./tarefa/completar_frase.js"></script>
+  <script type="text/javascript" src="./res/present_prefect_simple.js"></script>
+  <script type="text/javascript" src="./tarefa/selecionar_checkboxes.js"></script>
 </head>
 
 <body>
@@ -71,47 +73,48 @@
 
 
       <div class="card">
+
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12 col-md-12 h5 col-md-offset-3">
               <div class="row">
                 <div class="questContainer" firstatempt="true" id="first" questindex="0">
                   <h2>
-                    Complete as sentenças, clicando na opção correta ao espaço "_____"
+                    Considere as sentenças abaixo e indique se estão na "Present perfect" ou "Present simple".
                   </h2>
+
+
                   <div class="progress" style="height: 20px;">
                     <div class="progress-bar progress-bar-striped bg-success"
                       v-bind:style="{'width': porcentagem + '%'}">
                       <h4>
                         {{porcentagem}}%
-
                       </h4>
                     </div>
                   </div>
+
                   <h3>
-                    <p class="quest">{{frase.frase_escondida}}</p>
+                    {{frase.frase}}
                   </h3>
 
-                  <label class="" v-for="trecho in frase.disposicao_trechos" :key="trecho.trecho"
-                    v-bind:style="{ 'background-color': trecho.background_color}">
-                    <div class="icheckbox_flat-green" v-on:click="adicionar_trecho(trecho)" style="position: relative;">
-                      <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" value="a"
-                          style="position: absolute; opacity: 0;"><ins class="iCheck-helper"
-                          style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px none; opacity: 0;"></ins>
-                      </div><ins class="iCheck-helper"
-                        style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px none; opacity: 0;"></ins>
-                    </div>
-                    <h3>
-                      {{trecho.trecho}}
-                    </h3>
-                  </label>
+                  <h4>
+                    <label for="checkbox" style="font-weight: bold; color:  rgb(99, 99, 99);">
+                      <input type="checkbox" id="passiva" v-model="passiva" v-on:click="checkboxzar('passiva')">
+                      {{checkbox_verdadeira}}
+                    </label>
+                  </h4>
+
+                  <h4>
+                    <label for="checkbox" style="font-weight: bold; color: rgb(99, 99, 99);">
+                      <input type="checkbox" id="ativa" v-model="ativa" v-on:click="checkboxzar('ativa')">
+                      {{checkbox_falsa}}
+                    </label>
+
+                  </h4>
+
                   <div class="row">
                     <div class="interact" style="width: 100%;">
                       <p class="feedback hideit" style="display: none;"></p>
-
-                      <!-- Botão resolver questão -->
-                      <!-- Mostra se a questão esta certa ou errada -->
-
                       <div class="check hideit hide" style="display: block;">
                         <div class=".col-12  col-md-offset-2">
                           <button type="button" class="btn btn-success btn-block"
@@ -122,26 +125,44 @@
                           </button>
                         </div>
                       </div>
-
-                      <!-- Botão Proxima questão -->
-                      <div class="navbuttons " style="display: none;" style="width: 100%;">
-                        <div class="col-12  col-md-offset-2">
+                      <div class="navbuttons " style="display: none;">
+                        <div class=".col-sm-12 col-md-offset-2">
                           <button class="btn btn-info btn-block next" v-on:click="ir_proxima_frase()">
                             <h3>
-                              <span class="glyphicon glyphicon-chevron-right">Próxima Questão</span>
+                              Próxima Questão
                             </h3>
                           </button>
                         </div>
                       </div>
-
+                      <div class="alert alert-success hideit" v-bind:style="{'display': div_results}">
+                        <h2>
+                          <span class="glyphicon glyphicon-ok"></span> Resultados:
+                        </h2>
+                        <div class="row">
+                          <div class=".col-sm-12 col-md-offset-2">
+                            <div class="">
+                              <div class="glyphicon glyphicon-remove" style="font-weight: bold;padding-left: 20px;">
+                                Acertos: {{acertos}} <br> Erros: {{erros}}<br><br></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12  col-md-offset-2">
+                            <a href="sessao.html" class="primary-a" title="Desafio">
+                              <h2>
+                                Próximo Desafio
+                              </h2>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
                       <div class="alert alert-success hideit" v-bind:style="{'display': acerto_div}">
                         <h4>
                           <h3 style="text-align: center;">Resposta Correta!</h3>
                           <img src="./public/images/gostar.png" alt="Logomarca do site"
                             style="width: 8%; display: block; margin-left: auto; margin-right: auto;" />
+                          <br>
                         </h4>
-                        <br>
-                        <br>
 
                         <div class="row">
                           <div class="col-sm-12  col-md-offset-2">
@@ -153,36 +174,7 @@
                           </div>
                         </div>
                       </div>
-
-                      <div class="alert alert-success hideit" v-bind:style="{'display': div_results}">
-                        <h2>
-                          <span class="glyphicon glyphicon-ok"></span> Resultados:
-                        </h2>
-                        <div class="row">
-                          <div class="col-sm-12  col-md-offset-2">
-                            <div class="">
-                              <div class="glyphicon glyphicon-remove" style="font-weight: bold;padding-left: 20px;">
-
-                                Acertos: {{acertos}} <br> Erros: {{erros}}<br><br></div>
-                            </div>uxo
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-12  col-md-offset-2">
-                            <a href="escrever_frase.html" class="primary-a" title="Desafio">
-                              <h2>
-                                Próximo Desafio
-                              </h2>
-                            </a>
-                            <!-- <button class="btn btn-info btn-block next">
-                              <h1></h1>
-                              róxima Questão
-                            </button> -->
-                          </div>
-                        </div>
-                      </div>
                       <div class="alert alert-danger hideit" v-bind:style="{'display': erro_div}">
-
                         <h4>
                           <h3 style="text-align: center;">Resposta Incorreta...</h3>
                           <img src="./public/images/nao-gosto.png" alt="Logomarca do site"
@@ -191,19 +183,16 @@
 
                         <div class="alert alert-warning" role="alert">
                           Resposta valida: <br>
-                          <div class="" v-for="trecho in frase.trechos_escondidos" :key="trecho.trecho">
-                            <div class="glyphicon glyphicon-remove" style="font-weight: bold;">{{trecho.trecho}}</div>
+                          <div class="">
+                            <div class="glyphicon glyphicon-remove" style="font-weight: bold;">{{voz_correta}}</div>
                           </div>
-
-                        </div>
+                        </div>                   
                         <br>
-
-                        <!-- Botão resposta errada -->
                         <div class="row">
                           <div class="col-sm-12 col-md-offset-2">
                             <button class="btn btn-danger btn-block next" v-on:click="ir_proxima_frase()">
                               <h3>
-                                <span class="glyphicon glyphicon-chevron-right">Próxima Questão</span>
+                                Próxima Questão
                               </h3>
                           </div>
                         </div>
@@ -212,7 +201,6 @@
                   </div>
                 </div>
               </div>
-              <c></c>
             </div>
           </div>
         </div>
@@ -220,6 +208,19 @@
     </main>
   </div>
   </div>
-  <script type="text/javascript" src="./interface/completar_frase.js"></script>
+
+  <script src="./public/scripts/page-create-orphanage.js"></script>
 </body>
+
+<script type="text/javascript" src="./interface/selecionar_checkboxes.js"></script>
+
 </html>
+<script type="text/javascript">
+  appe.checkbox_verdadeira = "Present perfect";
+  appe.checkbox_falsa = "Present simple";
+  appe.vozes = {
+      "Voz Ativa": "Present simple",
+      "Voz Passiva": "Present perfect",
+  }
+
+</script>

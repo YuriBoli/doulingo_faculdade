@@ -1,27 +1,19 @@
 var appe = new Vue({
   el: '#app',
   data: {
-    message: '',
+    message: 'Olá Vue!',
     acertos: 0,
     erros: 0,
     frases_json: json_data,
     indice_frase_atual: 0,
     porcentagem: 0,
     total: 0,
-    passiva: false,
-    ativa: false,
-    voz_correta: "",
     erro_div: "none",
     acerto_div: "none",
     check_botao: "block",
     frase: "",
     div_results: "none",
-    checkbox_verdadeira: false,
-    checkbox_falsa: false,
-    vozes: {
-      "Voz Passiva": "Voz Passiva",
-      "Voz Ativa": "Voz Ativa"
-    }
+    frase: new SelecionaRespostaFrase("",[]),
   },
   methods: {
     chamar_resultados: function(){
@@ -35,21 +27,24 @@ var appe = new Vue({
         this.$forceUpdate();
       }
     },
-    checkboxzar: function(voz){
-      console.log(voz)
-      this.passiva = false
-      this.ativa = false
-      if (voz =="ativa"){
-        this.frase.voz_user = true
-        this.ativa = true
+    adicionar_trecho: function(trecho){
+      var t_frase = trecho["questao"]
+      this.frase.trecho_user = trecho["trecho_user"]
+      for(var indice in this.frase.disposicao_questoes){
+        var questao = this.frase.disposicao_questoes[indice]
+        if (t_frase == questao["questao"]){
+           this.frase.disposicao_questoes[indice]["background_color"] = "#6bfa9d";
+        } else {
+           this.frase.disposicao_questoes[indice]["background_color"] = "#FFFFFF";
+        }
       }
-      if (voz == "passiva"){
-        this.frase.voz_user = false
-        this.passiva = true
-      }
+      this.$forceUpdate();
+    },
+    remover_trecho: function(){
+      console.log("erros: acertos:")
     },
     checar_resultado: function(){
-      resultado_positiva = this.frase.verificar_voz()
+      var resultado_positiva = this.frase.verificar_trechos()
       if (resultado_positiva){
         this.acertos += 1;
         this.acerto_div = "block";
@@ -57,7 +52,6 @@ var appe = new Vue({
         this.erros += 1;
         this.erro_div = "block";
       }
-      this.voz_correta = this.vozes[this.frase.voz_correta()]
       this.check_botao = "none";
       this.$forceUpdate();
       //this.ir_proxima_frase()
@@ -73,18 +67,15 @@ var appe = new Vue({
       this.check_botao = "block";
       this.erro_div = "none";
       this.acerto_div = "none";
-      this.message = "";
       this.chamar_resultados();
-      this.passiva = false;
-      this.ativa = false;
       this.$forceUpdate();
     },
     carregar_frase: function(){
       this.total = this.frases_json["data"].length
       var frase_object = this.frases_json["data"][this.indice_frase_atual]
       var frase = frase_object["frase"]
-      var frase_resposta = frase_object["vos_ativa"]
-      return new Checkboxes(frase, frase_resposta)
+      var trechos = frase_object["options"]
+      return new SelecionaRespostaFrase(frase, shuffle(trechos))
     },
     update_porcentagem: function(porcentagem = undefined){
       if(porcentagem){
